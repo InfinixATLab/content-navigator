@@ -7,8 +7,8 @@
 
 ## Requisitos Essenciais (Timebox 4h)
 
-1. Navegação (React Navigation):
-    - Configure um *NavigationContainer* e um *createNativeStackNavigator*
+1. Navegação (Expo Router):
+    - Configure rotas e navegação.
     - Defina duas telas: *Home* (para a lista) e *Profile* (para os detalhes)
 2. Consumo de API:
     - Use **axios** para buscar uma lista de 20 usuários da API.
