@@ -53,6 +53,7 @@ export type User = {
     thumbnail: string;
   };
   nat: string;
+  seed: string;
 };
 
 export type GetUsersResponse = {

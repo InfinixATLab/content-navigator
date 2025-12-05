@@ -1,31 +1,11 @@
 import { ActivityIndicator, FlatList, Text } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import axios from "axios";
-import { GetUsersResponse, User } from "@/src/types/user";
 import UserCard from "@/src/components/UserCard";
+import { useUsers } from "@/src/context/useUsers";
 
 const Home = () => {
-  const [users, setUsers] = React.useState<User[]>([]);
-  const [loading, setLoading] = React.useState(false);
-
-  async function getUsers() {
-    const url = process.env.EXPO_PUBLIC_API_URL || "";
-    setLoading(true);
-    try {
-      const response = await axios.get(url + "?results=20");
-      const data = (await response.data) as GetUsersResponse;
-      setUsers(data.results);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  }
-
-  React.useEffect(() => {
-    getUsers();
-  }, []);
+  const { users, loading } = useUsers();
 
   return (
     <SafeAreaView className="flex-1 items-center bg-[#f0f0f0]">
@@ -35,8 +15,10 @@ const Home = () => {
       ) : (
         <FlatList
           data={users}
-          renderItem={({ item }) => <UserCard info={item} />}
-          keyExtractor={(item, index) => item.id.value + index}
+          renderItem={({ item, index }) => (
+            <UserCard info={item} index={index} />
+          )}
+          keyExtractor={(item, index) => item.name.first + index}
         />
       )}
     </SafeAreaView>
