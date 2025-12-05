@@ -1,18 +1,25 @@
-import { Image, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useUsers } from "@/src/context/useUsers";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomInput from "@/src/components/CustomInput";
-import { Mail, MapPinned, Phone, User } from "lucide-react-native";
+import { ArrowLeft, Mail, MapPinned, Phone, User } from "lucide-react-native";
 
 const UserDetails = () => {
+  const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { users } = useUsers();
   const userInfo = users[Number(id)];
 
   return (
-    <SafeAreaView className="flex-1 items-center py-8">
+    <SafeAreaView className="flex-1 items-center py-8 relative">
+      <TouchableOpacity
+        className="absolute top-10 left-7"
+        onPress={() => router.back()}
+      >
+        <ArrowLeft />
+      </TouchableOpacity>
       <ScrollView>
         <View className="items-center gap-4">
           <Image
