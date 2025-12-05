@@ -5,7 +5,7 @@ import UserCard from "@/src/components/UserCard";
 import { useUsers } from "@/src/context/useUsers";
 
 const Home = () => {
-  const { users, loading } = useUsers();
+  const { users, loading, getUsers } = useUsers();
 
   return (
     <SafeAreaView className="flex-1 items-center bg-[#f0f0f0]">
@@ -19,6 +19,8 @@ const Home = () => {
             <UserCard info={item} index={index} />
           )}
           keyExtractor={(item, index) => item.name.first + index}
+          onRefresh={() => getUsers()}
+          refreshing={loading}
         />
       )}
     </SafeAreaView>

@@ -6,6 +6,7 @@ interface UserContextReturn {
   users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
   loading: boolean;
+  getUsers: () => Promise<void>;
 }
 
 const UserContext = createContext<UserContextReturn | undefined>(undefined);
@@ -33,7 +34,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ users, setUsers, loading }}>
+    <UserContext.Provider value={{ users, setUsers, loading, getUsers }}>
       {children}
     </UserContext.Provider>
   );
