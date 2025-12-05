@@ -3,8 +3,8 @@ import React from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useUsers } from "@/src/context/useUsers";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CustomInput from "@/src/components/CustomInput";
-import { ArrowLeft, Mail, MapPinned, Phone, User } from "lucide-react-native";
+import { ArrowLeft } from "lucide-react-native";
+import UserFieldsDetails from "./components/UserFieldsDetails";
 
 const UserDetails = () => {
   const router = useRouter();
@@ -38,47 +38,7 @@ const UserDetails = () => {
             </Text>
           </View>
         </View>
-        <View className="min-w-[285px] mt-8 gap-4">
-          <CustomInput
-            label="Username"
-            text={userInfo.login.username}
-            Icon={() => <User size={12} color="#494949" />}
-          />
-          <CustomInput
-            label="Email"
-            text={userInfo.email}
-            Icon={() => <Mail size={12} color="#494949" />}
-          />
-          <CustomInput
-            label="Phone"
-            text={userInfo.phone}
-            Icon={() => <Phone size={12} color="#494949" />}
-          />
-          <CustomInput
-            label="Country"
-            text={userInfo.location.country}
-            Icon={() => <MapPinned size={12} color="#494949" />}
-          />
-          <CustomInput
-            label="State"
-            text={userInfo.location.state}
-            Icon={() => <MapPinned size={12} color="#494949" />}
-          />
-          <CustomInput
-            label="City"
-            text={userInfo.location.city}
-            Icon={() => <MapPinned size={12} color="#494949" />}
-          />
-          <CustomInput
-            label="Street"
-            text={
-              userInfo.location.street.name +
-              ", " +
-              userInfo.location.street.number
-            }
-            Icon={() => <MapPinned size={12} color="#494949" />}
-          />
-        </View>
+        <UserFieldsDetails userInfo={userInfo} />
       </ScrollView>
     </SafeAreaView>
   );
